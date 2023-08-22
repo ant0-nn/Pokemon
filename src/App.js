@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import CharInfo from "./components/CharInfo";
+import CharList from "./components/CharList";
+import Header from "./components/Header";
 
-function App() {
+const App = () => {
+  const [selectedChar, setChar] = useState(null);
+
+  const onCharSelected = (id) => {
+    setChar(id);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8">
+        <div className="flex flex-col lg:flex-row my-10 justify-between gap-8">
+          <div className="lg:order-2">
+            <CharInfo charId={selectedChar} />
+          </div>
+          <div className="lg:order-1">
+            <CharList onCharSelected={onCharSelected} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
